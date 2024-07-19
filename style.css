@@ -52,7 +52,7 @@ ul li a:before {
   opacity: 0;
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 500px;
+  letter-spacing: 100px;
   transition: letter-spacing 0.5s, left 0.5s;
 }
 ul li a:hover:before {
