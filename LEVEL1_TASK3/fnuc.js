@@ -1,49 +1,42 @@
-let celsiusInput = document.querySelector('#celsius > input')
-let fahrenheitInput = document.querySelector('#fahrenheit > input')
-let kelvinInput = document.querySelector('#kelvin > input')
-
-let btn = document.querySelector('.button button')
-
-
-function roundNumber(number){
-    return Math.round(number*100)/100
-}
-
-
-/* Celcius to Fahrenheit and Kelvin */
-celsiusInput.addEventListener('input', function(){
-    let cTemp = parseFloat(celsiusInput.value)
-    let fTemp = (cTemp*(9/5)) + 32
-    let kTemp = cTemp + 273.15
-
-    fahrenheitInput.value = roundNumber(fTemp)
-    kelvinInput.value = roundNumber(kTemp)
-})
-
-
-/* Fahrenheit to Celcius and Kelvin */
-fahrenheitInput.addEventListener('input', function(){
-    let fTemp = parseFloat(fahrenheitInput.value)
-    let cTemp = (fTemp - 32) * (5/9)
-    let kTemp = (fTemp -32) * (5/9) + 273.15
-
-    celsiusInput.value = roundNumber(cTemp)
-    kelvinInput.value = roundNumber(kTemp)
-})
-
-/* Kelvin to Celcius and Fahrenheit */
-kelvinInput.addEventListener('input', function(){
-    let kTemp = parseFloat(kelvinInput.value)
-    let cTemp = kTemp - 273.15
-    let fTemp = (kTemp - 273.15) * (9/5) + 32
-
-    celsiusInput.value = roundNumber(cTemp)
-    fahrenheitInput.value = roundNumber(fTemp)
-})
-
-
-btn.addEventListener('click', ()=>{
-    celsiusInput.value = ""
-    fahrenheitInput.value = ""
-    kelvinInput.value = ""
-})
+function convertTemperature() {
+    var inputTemperature = document.getElementById("inputTemperature").value;
+    var inputUnit = document.getElementById("inputUnit").value;
+    var resultElement = document.getElementById("result");
+  
+    var celsius, fahrenheit, kelvin;
+  
+    if (inputUnit === "celsius") {
+      celsius = parseFloat(inputTemperature);
+      fahrenheit = celsiusToFahrenheit(celsius);
+      kelvin = celsiusToKelvin(celsius);
+    } else if (inputUnit === "fahrenheit") {
+      fahrenheit = parseFloat(inputTemperature);
+      celsius = fahrenheitToCelsius(fahrenheit);
+      kelvin = celsiusToKelvin(celsius);
+    } else if (inputUnit === "kelvin") {
+      kelvin = parseFloat(inputTemperature);
+      celsius = kelvinToCelsius(kelvin);
+      fahrenheit = celsiusToFahrenheit(celsius);
+    }
+  
+    resultElement.innerHTML =
+      "Celsius: " + celsius + "<br>" +
+      "Fahrenheit: " + fahrenheit + "<br>" +
+      "Kelvin: " + kelvin;
+  }
+  
+  function celsiusToFahrenheit(celsius) {
+    return (celsius * 9 / 5) + 32;
+  }
+  
+  function fahrenheitToCelsius(fahrenheit) {
+    return (fahrenheit - 32) * 5 / 9;
+  }
+  
+  function celsiusToKelvin(celsius) {
+    return celsius + 273.15;
+  }
+  
+  function kelvinToCelsius(kelvin) {
+    return kelvin - 273.15;
+  }
